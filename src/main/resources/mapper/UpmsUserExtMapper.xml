@@ -17,9 +17,24 @@
         <result column="update_dts" property="updateDts" />
     </resultMap>
 
+    <resultMap id="UpmsUserRes" type="com.demo.mybatisplus.model.res.UpmsUserRes">
+        <id column="user_id" property="userId" />
+        <result column="username" property="username" />
+        <result column="realname" property="realname" />
+        <result column="avatar" property="avatar" />
+        <result column="phone" property="phone" />
+        <result column="email" property="email" />
+        <result column="sex" property="sex" />
+        <result column="locked" property="locked" />
+    </resultMap>
+
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         user_id, username, password, realname, avatar, phone, email, sex, locked, create_dts, update_dts
+    </sql>
+
+    <sql id="UpmsUserRes">
+        user_id, username, realname, avatar, phone, email, sex, locked
     </sql>
 
     <select id="selectAll" resultMap="BaseResultMap">
@@ -27,5 +42,14 @@
         <include refid="Base_Column_List"></include>
         from upms_user
     </select>
+    <select id="selectPage" resultMap="UpmsUserRes">
+        select
+        <include refid="Base_Column_List"></include>
+        from upms_user
+        <where>
+
+        </where>
+    </select>
+
 
 </mapper>

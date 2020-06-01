@@ -1,7 +1,11 @@
 package com.demo.mybatisplus.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.demo.mybatisplus.model.UpmsUser;
+import com.demo.mybatisplus.model.res.UpmsUserRes;
+import com.demo.mybatisplus.model.vo.ConditionVo;
 
 import java.util.List;
 
@@ -16,4 +20,6 @@ import java.util.List;
 public interface UpmsUserExtMapper{
 
     List<UpmsUser> selectAll();
+
+    IPage<UpmsUserRes> selectPage(Page<UpmsUserRes> pages, ConditionVo conditionVo);
 }

@@ -6,16 +6,15 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.demo.mybatisplus.mapper.UpmsUserExtMapper;
 import com.demo.mybatisplus.model.UpmsUser;
+import com.demo.mybatisplus.model.res.UpmsUserRes;
+import com.demo.mybatisplus.model.vo.ConditionVo;
 import com.demo.mybatisplus.service.IUpmsUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -55,13 +54,19 @@ public class UpmsUserController {
     }
 
     @GetMapping(value = "/queryAllPage/{page}/{size}")
-    @ApiOperation("查询所有分页")
+    @ApiOperation("非自定义sql的查询分页")
     @ResponseBody
     public Object queryAllPage(@PathVariable Integer page, @PathVariable Integer size) {
-        Page<UpmsUser> pages = new Page<>(page, size);
-        IPage<UpmsUser> userIPage = iUpmsUserService.pageMaps(pages, new QueryWrapper<UpmsUser>());
-        List<UpmsUser> upmsUserList = upmsUserExtMapper.selectAll();
-        return upmsUserList;
+        IPage<UpmsUser> userIPage = iUpmsUserService.queryAllPage(page, size);
+        return userIPage;
+    }
+
+    @PostMapping(value = "/queryAllPageTwo")
+    @ApiOperation("自定义sql的分页查询")
+    @ResponseBody
+    public Object queryAllPageTwo(@RequestBody ConditionVo conditionVo) {
+        IPage<UpmsUserRes> userIPage = iUpmsUserService.queryAllPageTwo(conditionVo);
+        return userIPage;
     }
 
 }
