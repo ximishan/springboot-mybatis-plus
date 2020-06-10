@@ -37,12 +37,6 @@ public class MpGenerator {
         // mybatis-plus代码生成器生成的是LocalDateTime，默认的情况下，在mybatis里面不支持java8的时间、日期
         gc.setDateType(DateType.ONLY_DATE);
 
-        // 自定义文件命名，注意 %s 会自动填充表实体属性！
-        // gc.setMapperName("%sDao");
-        // gc.setXmlName("%sDao");
-        // gc.setServiceName("MP%sService");
-        // gc.setServiceImplName("%sServiceDiy");
-        // gc.setControllerName("%sAction");
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
