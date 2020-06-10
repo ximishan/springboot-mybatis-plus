@@ -12,3 +12,13 @@ spring boot 集成mybatis-plus, swagger
 + 2.4 生成的表名替换。    
 + 2.5 生成的xml文件在resource/mapper下。    
 + 2.6 需要注意的是，mybatis-plus生成的实体默认主键是id，如果自定义表的主键不是id，需要使用注解@TableId()明确指定。
+
+3.集成valid参数校验。
+
+4.统一处理异常信息。查看 ExceptionControllerAdvice 类。
+
+5.格式化接口调用的返回参数。查看 ResponseControllerAdvice 类。
+
+6.aop 查询接口的调用性能。根据需要自定义保存到数据库中。
+
+7.待补充
