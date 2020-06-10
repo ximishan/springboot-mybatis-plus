@@ -16,12 +16,20 @@
 
     <properties>
         <java.version>1.8</java.version>
-<!--        mybatis-plus-->
+        <!--        mybatis-plus-->
         <mybatis-plus.version>3.3.2</mybatis-plus.version>
-<!--        velocity 模版引擎-->
+        <!--        velocity 模版引擎-->
         <velocity.version>2.0</velocity.version>
-<!--        mysql连接-->
+        <!--        mysql连接-->
         <mysql-connector.version>5.1.38</mysql-connector.version>
+        <!--        swagger-->
+        <swagger.version>2.9.2</swagger.version>
+        <!--        swagger-bootstrap.version-->
+        <swagger-bootstrap.version>1.8.1</swagger-bootstrap.version>
+        <!--        lombok-->
+        <lombok.version>1.16.22</lombok.version>
+        <!--        hutool-->
+        <hutool.version>4.1.21</hutool.version>
     </properties>
 
     <dependencies>
@@ -35,6 +43,17 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!--        aop-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+        <!--        valid-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -57,7 +76,7 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.velocity/velocity-engine-core -->
-<!--        模版引擎-->
+        <!--        模版引擎-->
         <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity-engine-core</artifactId>
@@ -71,34 +90,44 @@
             <scope>runtime</scope>
         </dependency>
 
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.junit.vintage</groupId>
-                    <artifactId>junit-vintage-engine</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
         <!--Swagger-UI API文档生产工具-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
+            <version>${swagger.version}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
+            <version>${swagger.version}</version>
         </dependency>
+        <!--        swagger doc 依赖-->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>swagger-bootstrap-ui</artifactId>
-            <version>1.8.1</version>
+            <version>${swagger-bootstrap.version}</version>
+        </dependency>
+
+        <!--        lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+
+        <!--        common-lang3-->
+        <!--        commons-lang3.version 在 spring-boot parent中定义-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+
+        <!--        hutool-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
         </dependency>
     </dependencies>
 
