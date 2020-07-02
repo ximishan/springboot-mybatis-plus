@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class ConditionVo implements Serializable {
 
     /**
-     * 此处翻译为页码而不是偏移量
+     * 此处翻译为页码
      */
     private int currentPage = 1;
 

@@ -1,13 +1,11 @@
 package com.demo.mybatisplus.enums;
 
 import com.demo.mybatisplus.constants.ApiConstant;
-import lombok.Getter;
 
 /**
  * @author RudeCrab
  * @description 响应码枚举
  */
-@Getter
 public enum ResultCode {
 
     SUCCESS(200, "操作成功", ApiConstant.STATUS_SUCCESS),
@@ -32,5 +30,27 @@ public enum ResultCode {
         this.success = status;
     }
 
+    public void setCode(int code) {
+        this.code = code;
+    }
 
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
 }

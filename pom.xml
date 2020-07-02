@@ -26,8 +26,6 @@
         <swagger.version>2.9.2</swagger.version>
         <!--        swagger-bootstrap.version-->
         <swagger-bootstrap.version>1.8.1</swagger-bootstrap.version>
-        <!--        lombok-->
-        <lombok.version>1.16.22</lombok.version>
         <!--        hutool-->
         <hutool.version>4.1.21</hutool.version>
     </properties>
@@ -108,13 +106,6 @@
             <version>${swagger-bootstrap.version}</version>
         </dependency>
 
-        <!--        lombok-->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-        </dependency>
-
         <!--        common-lang3-->
         <!--        commons-lang3.version 在 spring-boot parent中定义-->
         <dependency>
@@ -128,6 +119,13 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>${hutool.version}</version>
+        </dependency>
+
+        <!-- Gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
         </dependency>
     </dependencies>
 

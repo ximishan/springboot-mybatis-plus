@@ -4,11 +4,11 @@ import com.demo.mybatisplus.constants.ApiConstant;
 import com.demo.mybatisplus.enums.ResultCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @ApiModel
 public class ResultVO<T> {
 
@@ -61,6 +61,13 @@ public class ResultVO<T> {
         return success("操作成功", data);
     }
 
+    public static ResultVO successList(List list) {
+        Map result = new HashMap();
+        result.put("rows", list);
+        return successData(result);
+    }
+
+
     public static ResultVO success(String msg, Object data) {
         return new ResultVO(ApiConstant.CODE_SUCCESS, msg,ApiConstant.STATUS_SUCCESS, data);
     }
@@ -75,5 +82,37 @@ public class ResultVO<T> {
 
     public static ResultVO error(ResultCode resultCode) {
         return new ResultVO(resultCode);
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
     }
 }
