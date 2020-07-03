@@ -11,6 +11,14 @@ public enum ResultCode {
     SUCCESS(200, "操作成功", ApiConstant.STATUS_SUCCESS),
     FAILED(1001, "响应失败", ApiConstant.STATUS_ERROR),
     VALIDATE_FAILED(1002, "参数校验失败", ApiConstant.STATUS_ERROR),
+    TOKEN_ERROR(1003, "请求携带的token不正确", ApiConstant.STATUS_ERROR),
+
+    ROLE_EXIST_FAILED(2000, "角色已经存在", ApiConstant.STATUS_ERROR),
+    ROLE_NOT_EXIST_FAILED(2001, "角色不存在", ApiConstant.STATUS_ERROR),
+    PERMISSION_NOT_EXIST_FAILED(2002, "权限ID不存在", ApiConstant.STATUS_ERROR),
+    USERNAME_EXIST_FAILED(2003, "用户名已经存在", ApiConstant.STATUS_ERROR),
+    PHONE_NUMBER_EXIST_FAILED(2004, "该手机号对应的用户不存在，请联系管理员申请", ApiConstant.STATUS_ERROR),
+
 
     BAD_REQUEST_ERROR(400, "Bad request", ApiConstant.STATUS_ERROR),
     UNAUTHORIZED_ERROR(401, "UNAUTHORIZED", ApiConstant.STATUS_ERROR),

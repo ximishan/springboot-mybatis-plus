@@ -1,55 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.mybatisplus.mapper.UpmsUserExtMapper">
+  <resultMap id="BaseResultMap" type="com.demo.mybatisplus.model.UpmsUser">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="realname" jdbcType="VARCHAR" property="realname" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="locked" jdbcType="BIT" property="locked" />
+    <result column="create_dts" jdbcType="TIMESTAMP" property="createDts" />
+    <result column="update_dts" jdbcType="TIMESTAMP" property="updateDts" />
+  </resultMap>
 
-    <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.demo.mybatisplus.model.UpmsUser">
-        <id column="user_id" property="userId" />
-        <result column="username" property="username" />
-        <result column="password" property="password" />
-        <result column="realname" property="realname" />
-        <result column="avatar" property="avatar" />
-        <result column="phone" property="phone" />
-        <result column="email" property="email" />
-        <result column="sex" property="sex" />
-        <result column="locked" property="locked" />
-        <result column="create_dts" property="createDts" />
-        <result column="update_dts" property="updateDts" />
-    </resultMap>
+  <resultMap id="UpmsUserMiniRes" type="com.demo.mybatisplus.model.res.UpmsUserMiniRes">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="realname" jdbcType="VARCHAR" property="realname" />
+  </resultMap>
 
-    <resultMap id="UpmsUserRes" type="com.demo.mybatisplus.model.res.UpmsUserRes">
-        <id column="user_id" property="userId" />
-        <result column="username" property="username" />
-        <result column="realname" property="realname" />
-        <result column="avatar" property="avatar" />
-        <result column="phone" property="phone" />
-        <result column="email" property="email" />
-        <result column="sex" property="sex" />
-        <result column="locked" property="locked" />
-    </resultMap>
 
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        user_id, username, password, realname, avatar, phone, email, sex, locked, create_dts, update_dts
-    </sql>
+  <sql id="Base_Column_List">
+    user_id, username, password, realname, avatar, phone, email, sex, locked, create_dts,
+    update_dts
+  </sql>
 
-    <sql id="UpmsUserRes">
-        user_id, username, realname, avatar, phone, email, sex, locked
-    </sql>
+  <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from upms_user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
 
-    <select id="selectAll" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"></include>
-        from upms_user
+    <select id="selectUpmsUserMiniSelectList" resultType="com.demo.mybatisplus.model.res.UpmsUserMiniRes">
+        select user_id, realname from upms_user
     </select>
-    <select id="selectPage" resultMap="UpmsUserRes">
-        select
-        <include refid="Base_Column_List"></include>
-        from upms_user
-        <where>
-
-        </where>
-    </select>
-
-
 </mapper>

@@ -1,60 +1,95 @@
 package com.demo.mybatisplus.model.res;
 
-import com.baomidou.mybatisplus.annotation.TableId;
+import io.swagger.annotations.ApiModelProperty;
 
-import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 
-/**
- * <p>
- * 用户
- * </p>
- *
- * @author Zhangfeng
- * @since 2020-06-01
- */
 public class UpmsUserRes {
-
     /**
      * 编号
+     *
+     * @mbggenerated
      */
-    @TableId("user_id")
+    @ApiModelProperty(notes = "用户id")
     private String userId;
 
     /**
      * 帐号
+     *
+     * @mbggenerated
      */
+    @ApiModelProperty(notes = "帐号")
     private String username;
 
     /**
      * 姓名
+     *
+     * @mbggenerated
      */
+    @ApiModelProperty(notes = "姓名")
     private String realname;
 
     /**
      * 头像
+     *
+     * @mbggenerated
      */
+    @ApiModelProperty(notes = "头像")
     private String avatar;
 
     /**
      * 电话
+     *
+     * @mbggenerated
      */
+    @ApiModelProperty(notes = "电话")
     private String phone;
 
     /**
      * 邮箱
+     *
+     * @mbggenerated
      */
+    @ApiModelProperty(notes = "邮箱")
     private String email;
 
     /**
      * 性别(1男/2女)
+     *
+     * @mbggenerated
      */
+    @ApiModelProperty(notes = "性别(1男/2女)")
     private Integer sex;
 
     /**
      * 状态(0:正常,1:锁定)
+     *
+     * @mbggenerated
      */
+    @ApiModelProperty(notes = "状态(0:正常,1:锁定)")
     private Boolean locked;
+
+    @ApiModelProperty(notes = "角色id数组")
+    private List<String> roleIdList;
+
+    @ApiModelProperty(notes = "角色名称")
+    private String roleNameStr;
+
+    public List<String> getRoleIdList() {
+        return roleIdList;
+    }
+
+    public void setRoleIdList(List<String> roleIdList) {
+        this.roleIdList = roleIdList;
+    }
+
+    public String getRoleNameStr() {
+        return roleNameStr;
+    }
+
+    public void setRoleNameStr(String roleNameStr) {
+        this.roleNameStr = roleNameStr;
+    }
 
     public String getUserId() {
         return userId;

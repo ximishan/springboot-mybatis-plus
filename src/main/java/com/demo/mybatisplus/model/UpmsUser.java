@@ -2,8 +2,8 @@ package com.demo.mybatisplus.model;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 
-import java.util.Date;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -15,13 +15,13 @@ import java.io.Serializable;
  */
 public class UpmsUser implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * 编号
      */
     @TableId("user_id")
-      private String userId;
+    private String userId;
 
     /**
      * 帐号
@@ -165,17 +165,17 @@ public class UpmsUser implements Serializable {
     @Override
     public String toString() {
         return "UpmsUser{" +
-        "userId=" + userId +
-        ", username=" + username +
-        ", password=" + password +
-        ", realname=" + realname +
-        ", avatar=" + avatar +
-        ", phone=" + phone +
-        ", email=" + email +
-        ", sex=" + sex +
-        ", locked=" + locked +
-        ", createDts=" + createDts +
-        ", updateDts=" + updateDts +
-        "}";
+                "userId=" + userId +
+                ", username=" + username +
+                ", password=" + password +
+                ", realname=" + realname +
+                ", avatar=" + avatar +
+                ", phone=" + phone +
+                ", email=" + email +
+                ", sex=" + sex +
+                ", locked=" + locked +
+                ", createDts=" + createDts +
+                ", updateDts=" + updateDts +
+                "}";
     }
 }

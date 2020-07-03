@@ -1,5 +1,8 @@
 package com.demo.mybatisplus.model.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.Serializable;
 
 /**
@@ -26,6 +29,20 @@ public class ConditionVo implements Serializable {
      * 排序方式
      */
     private String order;
+
+    @JsonIgnore
+    private String sortIndex;
+
+    public String getSortIndex() {
+        if (StringUtils.isNotBlank(getSort()) && StringUtils.isNotBlank(getOrder())) {
+            sortIndex = getSort() + " " + getOrder();
+        }
+        return sortIndex;
+    }
+
+    public void setSortIndex(String sortIndex) {
+        this.sortIndex = sortIndex;
+    }
 
     public int getCurrentPage() {
         return currentPage;

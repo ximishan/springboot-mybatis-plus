@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mybatisplus.mapper.UpmsPermissionExtMapper">
+  <!-- 权限 -->
+  <resultMap id="UpmsPermissionResultMap" type="com.demo.mybatisplus.model.UpmsPermission">
+    <id column="permission_id" jdbcType="VARCHAR" property="permissionId" />
+    <result column="pid" jdbcType="VARCHAR" property="pid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="permission_value" jdbcType="VARCHAR" property="permissionValue" />
+    <result column="uri" jdbcType="VARCHAR" property="uri" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="ctime" jdbcType="BIGINT" property="ctime" />
+    <result column="orders" jdbcType="BIGINT" property="orders" />
+  </resultMap>
+
+  <resultMap id="UpmsPermissionResResultMap" type="com.demo.mybatisplus.model.res.PermissionRes">
+    <id column="permission_id" jdbcType="VARCHAR" property="permissionId" />
+    <result column="pid" jdbcType="VARCHAR" property="pid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="uri" jdbcType="VARCHAR" property="uri" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+  </resultMap>
+
+  <resultMap id="PermissionMiniRes" type="com.demo.mybatisplus.model.res.PermissionMiniRes">
+    <id column="permission_id" jdbcType="VARCHAR" property="permissionId" />
+    <result column="pid" jdbcType="VARCHAR" property="pid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+
+
+
+  <!-- 角色 -->
+  <resultMap id="UpmsRoleResultMap" type="com.demo.mybatisplus.model.UpmsRole">
+    <id column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="ctime" jdbcType="BIGINT" property="ctime" />
+    <result column="orders" jdbcType="BIGINT" property="orders" />
+  </resultMap>
+
+  <resultMap id="UpmsUser" type="com.demo.mybatisplus.model.UpmsUser">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="realname" jdbcType="VARCHAR" property="realname" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="sex" jdbcType="BIT" property="sex" />
+    <result column="locked" jdbcType="BIT" property="locked" />
+    <result column="create_dts" jdbcType="TIMESTAMP" property="createDts" />
+    <result column="update_dts" jdbcType="TIMESTAMP" property="updateDts" />
+  </resultMap>
+
+  <resultMap id="UpmsUserRes" type="com.demo.mybatisplus.model.res.UpmsUserRes">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="realname" jdbcType="VARCHAR" property="realname" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="sex" jdbcType="BIT" property="sex" />
+    <result column="locked" jdbcType="BIT" property="locked" />
+  </resultMap>
+
+  <resultMap id="UpmsRoleRes" type="com.demo.mybatisplus.model.res.UpmsRoleRes">
+    <id column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+
+
+  <!-- 权限字段 -->
+  <sql id="UpmsPermission_Column_List">
+    permission_id, pid, name, type, permission_value, uri, icon, status, ctime, orders
+    </sql>
+
+  <!-- 权限字段 -->
+  <sql id="UpmsPermission_Res_Column_List">
+    permission_id, pid, name, uri, icon
+    </sql>
+
+  <!-- 角色字段 -->
+  <sql id="UpmsRole_Column_List">
+    role_id, name, title, description, ctime, orders
+    </sql>
+
+  <!-- 用户字段 -->
+  <sql id="UpmsUser_Column_List">
+    user_id, username, password, realname, avatar, phone, email, sex, locked, create_dts,
+    update_dts
+  </sql>
+
+    <delete id="deleteUserPermissionByUserId">
+      delete from upms_user_permission
+    where user_id = #{userId,jdbcType=VARCHAR}
+    </delete>
+  <delete id="deleteUserPermissionByPermissionId">
+    delete from upms_user_permission
+    where permission_id = #{permissionId,jdbcType=VARCHAR}
+  </delete>
+
+  <delete id="deleteRolePermissionByPermissionId">
+     delete from upms_role_permission where permission_id = #{permissionId,jdbcType=VARCHAR}
+  </delete>
+
+  <delete id="deleteRolePermissionByRoleId">
+    delete from upms_role_permission where role_id = #{roleId,jdbcType=VARCHAR}
+  </delete>
+
+  <delete id="deleteUserRoleByUserId">
+    delete from upms_user_role where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+
+  <delete id="deleteUserRoleByRoleId">
+    delete from upms_user_role where role_id = #{roleId,jdbcType=VARCHAR}
+  </delete>
+
+
+  <!-- 根据用户获取所拥有的权限 包括用户权限和角色权限 -->
+  <select id="selectUpmsPermissionByUpmsUserId" parameterType="java.lang.String" resultMap="UpmsPermissionResultMap">
+    select
+    <include refid="UpmsPermission_Column_List" />
+    from upms_permission up where up.`status`=1 and up.permission_id in (
+    select permission_id from upms_role_permission urp where urp.role_id in (
+    select uur.role_id role_id from upms_user_role uur where uur.user_id=#{upmsUserId,jdbcType=VARCHAR}
+    )
+    union
+    select permission_id from upms_user_permission uup1 where uup1.user_id=#{upmsUserId,jdbcType=VARCHAR}
+    )
+    and up.permission_id not in (
+    select permission_id from upms_user_permission uup2 where uup2.user_id=#{upmsUserId,jdbcType=VARCHAR}
+    ) order by up.orders asc
+  </select>
+
+  <!-- 根据用户获取所拥有的权限 只有用户权限 -->
+  <select id="getUpmsPermissionByUpmsUserId" parameterType="java.lang.String" resultMap="UpmsPermissionResultMap">
+    select
+    <include refid="UpmsPermission_Column_List" />
+    from upms_permission up where up.`status`=1 and up.permission_id in (
+    select permission_id from upms_user_permission uup1 where uup1.user_id=#{upmsUserId,jdbcType=VARCHAR}
+    )
+    and up.permission_id not in (
+    select permission_id from upms_user_permission uup2 where uup2.user_id=#{upmsUserId,jdbcType=VARCHAR}
+    ) order by up.orders asc
+  </select>
+
+  <!-- 根据用户id获取所属的角色 -->
+  <select id="selectUpmsRoleByUpmsUserId" parameterType="java.lang.String" resultMap="UpmsRoleResultMap">
+    select
+    <include refid="UpmsRole_Column_List" />
+    from upms_role ur where ur.role_id in (
+    select uur.role_id from upms_user_role uur where uur.user_id=#{upmsUserId,jdbcType=VARCHAR}
+    )
+  </select>
+
+  <select id="getPermissionList" resultMap="UpmsPermissionResultMap">
+    select
+    <include refid="UpmsPermission_Column_List" />
+    from upms_permission WHERE 1 = 1
+    <if test="search != null and search != ''">
+      AND name LIKE  CONCAT('%',#{search},'%')
+    </if>
+    <if test="sortIndex!=null and sortIndex!=''">
+      order by ${sortIndex}
+    </if>
+    limit #{startIndex},#{limit}
+  </select>
+
+  <select id="countPermissionList" resultType="java.lang.Integer">
+    SELECT
+    count(*)
+    FROM upms_permission WHERE 1 = 1
+    <if test="search != null and search != ''">
+      AND name LIKE  CONCAT('%',#{search},'%')
+    </if>
+    <if test="sortIndex!=null and sortIndex!=''">
+      order by ${sortIndex}
+    </if>
+  </select>
+
+  <select id="getUpmsRoleUserList" resultMap="UpmsUser">
+    SELECT
+    uus.user_id, uus.username, uus.password,
+    uus.realname, uus.avatar, uus.phone, uus.email,
+    uus.sex, uus.locked, uus.create_dts
+    FROM upms_user uus left join upms_user_role uur on uus.user_id = uur.user_id
+    left join upms_role uro on uro.role_id = uur.role_id
+    WHERE 1=1
+    <if test="search != null and search != ''">
+      AND username LIKE  CONCAT('%',#{search},'%')
+    </if>
+    <if test="roleId != null and roleId != ''">
+      AND uur.role_id = #{roleId}
+    </if>
+    order by uus.ctime desc
+  </select>
+
+    <select id="selectPermissionResListByUpmsUserId"
+            resultMap="UpmsPermissionResResultMap">
+      select
+      <include refid="UpmsPermission_Res_Column_List" />
+      from upms_permission up where up.`status`=1 and up.permission_id in (
+      select permission_id from upms_role_permission urp where urp.role_id in (
+      select uur.role_id role_id from upms_user_role uur where uur.user_id=#{upmsUserId,jdbcType=VARCHAR}
+      )
+      union
+      select permission_id from upms_user_permission uup1 where uup1.user_id=#{upmsUserId,jdbcType=VARCHAR}
+      )
+      and up.permission_id not in (
+      select permission_id from upms_user_permission uup2 where uup2.user_id=#{upmsUserId,jdbcType=VARCHAR}
+      ) order by up.orders asc
+    </select>
+
+    <select id="countMaxOrders" resultType="java.lang.Integer">
+        select max(orders) from upms_permission;
+    </select>
+
+  <select id="getRoleListPage" resultMap="UpmsRoleResultMap">
+    SELECT
+    role_id, name, title, description, ctime, orders
+    FROM upms_role
+    <if test="ew.emptyOfWhere == false">
+      ${ew.customSqlSegment}
+    </if>
+    <if test="sortIndex!=null and sortIndex!=''">
+      order by ${sortIndex}
+    </if>
+
+  </select>
+
+  <select id="getUpmsUserListPage" resultMap="UpmsUserRes">
+    SELECT
+    DISTINCT uus.user_id, uus.username, uus.password,
+    uus.realname, uus.avatar, uus.phone, uus.email,
+    uus.sex, uus.locked, uus.create_dts
+    FROM upms_user uus left join upms_user_role uur on uus.user_id = uur.user_id
+    left join upms_role uro on uro.role_id = uur.role_id
+    <if test="ew.emptyOfWhere == false">
+      ${ew.customSqlSegment}
+    </if>
+  </select>
+
+  <select id="getUpmsRoleResList" resultMap="UpmsRoleRes">
+    select uro.role_id, uro.name, uro.title, uro.description
+        from upms_user_role uur left join upms_role uro on uro.role_id = uur.role_id
+    where uur.user_id = #{userId}
+  </select>
+  <select id="selectAllMiniPermission" resultMap="PermissionMiniRes">
+        select permission_id, name, pid from upms_permission where status = 1 order by orders
+  </select>
+
+</mapper>
