@@ -2,6 +2,7 @@ package com.demo.mybatisplus.aop;
 
 import com.demo.mybatisplus.annotation.MethodPerformanceLog;
 import com.google.gson.Gson;
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -49,7 +50,17 @@ public class MethodPerformanceAspect {
         // 打印请求的 IP
         LOGGER.info("IP             : {}", request.getRemoteAddr());
         // 打印请求入参
-        LOGGER.info("Request Args   : {}", new Gson().toJson(joinPoint.getArgs()));
+        // 打印请求入参
+        try {
+            String queryString = request.getQueryString();
+            if (StringUtils.isNotBlank(queryString)) {
+                LOGGER.info("Request Args   : {}", queryString);
+            } else {
+                LOGGER.info("Request Args   : {}", new Gson().toJson(joinPoint.getArgs()[0]));
+            }
+        } catch (Exception e) {
+
+        }
         LOGGER.info("========================================== END ==========================================");
 
     }
