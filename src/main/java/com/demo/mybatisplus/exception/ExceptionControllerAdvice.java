@@ -55,7 +55,7 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler()
     public ResultVO ExceptionHandler(Exception e) {
         String errInfo = "程序报错，进入全局异常处理";
-        LOGGER.error("{}  e={} ",errInfo ,e+"");
+        LOGGER.error("{}  e={} ",errInfo ,e);
         // 从异常对象中拿到ObjectError对象
         String msg = e.getMessage() == null ? "系统出现异常" : e.getMessage();
         return ResultVO.error(msg);
