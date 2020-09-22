@@ -35,4 +35,5 @@ mvnw
 mvnw.cmd
 HELP.md
 */.DS_Store
+.DS_Store
 log/

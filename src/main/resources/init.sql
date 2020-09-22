@@ -91,6 +91,21 @@ CREATE TABLE `upms_user` (
   PRIMARY KEY (`user_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户';
 
+DROP TABLE IF EXISTS `sys_opt_log`;
+CREATE TABLE `sys_opt_log`  (
+  `id` bigint(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'userId',
+  `username` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'username',
+  `ip` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'ip',
+  `total_time` bigint(11) NULL DEFAULT NULL COMMENT '接口花费时间',
+  `params` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '参数',
+  `method_desc` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '方法名',
+  `result` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '返回值json',
+  `url` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '请求的url',
+  `create_dts` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志' ROW_FORMAT = Dynamic;
+
 BEGIN;
 INSERT INTO `upms_user`(`user_id`, `username`, `password`, `realname`, `avatar`, `phone`, `email`, `sex`, `locked`, `create_dts`, `update_dts`) VALUES ('1', 'admin', '$2a$10$JXDq.LuL0WRCkm60jPRm1ue4ZuXiERlHaHxYG1axsA4G9hCkNMvNO', 'admin', '', '', '', 1, 0, NULL, NULL);
 

@@ -45,7 +45,7 @@ public class MpGenerator {
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("123456");
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/db_upms?characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/db_upms?useSSL=false&characterEncoding=UTF8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true");
         mpg.setDataSource(dsc);
 
         // 策略配置
@@ -54,7 +54,7 @@ public class MpGenerator {
 //        strategy.setTablePrefix(new String[] { "upms_"});// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
         strategy.setColumnNaming(NamingStrategy.underline_to_camel); // 字段名生成策略
-        strategy.setInclude(new String[] { "upms_user" }); // 需要生成的表
+        strategy.setInclude(new String[] { "sys_opt_log" }); // 需要生成的表
         mpg.setStrategy(strategy);
 
         // 自定义配置

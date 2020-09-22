@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mybatisplus.mapper.SysOptLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.demo.mybatisplus.model.SysOptLog">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="username" property="username" />
+        <result column="ip" property="ip" />
+        <result column="total_time" property="totalTime" />
+        <result column="params" property="params" />
+        <result column="method_desc" property="methodDesc" />
+        <result column="result" property="result" />
+        <result column="url" property="url" />
+        <result column="create_dts" property="createDts" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id, username, ip, total_time, params, method_desc, result, url, create_dts
+    </sql>
+
+</mapper>
