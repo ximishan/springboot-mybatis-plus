@@ -18,12 +18,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author zhangfeng
@@ -68,16 +67,18 @@ public class MethodPerformanceAspect {
         LOGGER.info("IP             : {}", request.getRemoteAddr());
         // 打印请求入参
         try {
-            Object[] args = joinPoint.getArgs();
-            if (notInMethod().contains(signature.getDeclaringTypeName()+"."+signature.getName())) {
-                LOGGER.info("Request Args   : {}");
-            } else {
-                if (args.length>0) {
-                    LOGGER.info("Request Args   : {}", new Gson().toJson(args[0]));
-                } else {
-                    LOGGER.info("Request Args   : {}");
-                }
-            }
+//            Object[] args = joinPoint.getArgs();
+//            if (notInMethod().contains(signature.getDeclaringTypeName()+"."+signature.getName())) {
+//                LOGGER.info("Request Args   : {}");
+//            } else {
+//                if (args.length>0) {
+//                    LOGGER.info("Request Args   : {}", new Gson().toJson(args[0]));
+//                } else {
+//                    LOGGER.info("Request Args   : {}");
+//                }
+//            }
+            Map argsMap = getRequestParamsByJoinPoint(joinPoint);
+            LOGGER.info("Request Args   : {}", new Gson().toJson(argsMap));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -156,5 +157,46 @@ public class MethodPerformanceAspect {
         sysOptLog.setCreateDts(new Date());
         sysOptLogMapper.insert(sysOptLog);
 
+    }
+
+    /**
+     * 获取入参
+     * @param proceedingJoinPoint
+     *
+     * @return
+     * */
+    private Map<String, Object> getRequestParamsByProceedingJoinPoint(ProceedingJoinPoint proceedingJoinPoint) {
+        //参数名
+        String[] paramNames = ((MethodSignature)proceedingJoinPoint.getSignature()).getParameterNames();
+        //参数值
+        Object[] paramValues = proceedingJoinPoint.getArgs();
+
+        return buildRequestParam(paramNames, paramValues);
+    }
+
+    private Map<String, Object> getRequestParamsByJoinPoint(JoinPoint joinPoint) {
+        //参数名
+        String[] paramNames = ((MethodSignature)joinPoint.getSignature()).getParameterNames();
+        //参数值
+        Object[] paramValues = joinPoint.getArgs();
+
+        return buildRequestParam(paramNames, paramValues);
+    }
+
+    private Map<String, Object> buildRequestParam(String[] paramNames, Object[] paramValues) {
+        Map<String, Object> requestParams = new HashMap<>();
+        for (int i = 0; i < paramNames.length; i++) {
+            Object value = paramValues[i];
+
+            //如果是文件对象
+            if (value instanceof MultipartFile) {
+                MultipartFile file = (MultipartFile) value;
+                value = file.getOriginalFilename();  //获取文件名
+            }
+
+            requestParams.put(paramNames[i], value);
+        }
+
+        return requestParams;
     }
 }
