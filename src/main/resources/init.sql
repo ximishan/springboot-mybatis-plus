@@ -88,7 +88,8 @@ CREATE TABLE `upms_user` (
   `locked` tinyint(1) DEFAULT NULL COMMENT '状态(0:正常,1:锁定)',
   `create_dts` datetime DEFAULT NULL COMMENT '创建时间',
   `update_dts` datetime DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`user_id`) USING BTREE
+  PRIMARY KEY (`user_id`) USING BTREE,
+  UNIQUE KEY `idx_username` (`username`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户';
 
 DROP TABLE IF EXISTS `sys_opt_log`;
