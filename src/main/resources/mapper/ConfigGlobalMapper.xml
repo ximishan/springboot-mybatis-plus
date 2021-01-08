@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jessieray.supervise.mapper.ConfigGlobalMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.demo.mybatisplus.model.ConfigGlobal">
+        <id column="code_id" property="codeId" />
+        <result column="child_cd" property="childCd" />
+        <result column="child_code_nm" property="childCodeNm" />
+        <result column="parent_cd" property="parentCd" />
+        <result column="orders" property="orders" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        code_id, child_cd, child_code_nm, parent_cd, orders
+    </sql>
+
+</mapper>

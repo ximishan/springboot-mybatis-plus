@@ -99,13 +99,26 @@ CREATE TABLE `sys_opt_log`  (
   `username` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'username',
   `ip` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'ip',
   `total_time` bigint(11) NULL DEFAULT NULL COMMENT '接口花费时间',
-  `params` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '参数',
+  `params` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '参数',
   `method_desc` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '方法名',
   `result` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '返回值json',
   `url` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '请求的url',
   `create_dts` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for config_global
+-- ----------------------------
+DROP TABLE IF EXISTS `config_global`;
+CREATE TABLE `config_global` (
+  `code_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `child_cd` varchar(35) DEFAULT NULL COMMENT 'common编号',
+  `child_code_nm` varchar(100) DEFAULT NULL COMMENT 'common名称',
+  `parent_cd` varchar(35) DEFAULT NULL COMMENT '父code',
+  `orders` int(1) DEFAULT '1' COMMENT '顺序',
+  PRIMARY KEY (`code_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='全局基础字典';
 
 BEGIN;
 INSERT INTO `upms_user`(`user_id`, `username`, `password`, `realname`, `avatar`, `phone`, `email`, `sex`, `locked`, `create_dts`, `update_dts`) VALUES ('1', 'admin', '$2a$10$JXDq.LuL0WRCkm60jPRm1ue4ZuXiERlHaHxYG1axsA4G9hCkNMvNO', 'admin', '', '', '', 1, 0, NULL, NULL);
