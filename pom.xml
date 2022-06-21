@@ -21,7 +21,7 @@
         <!--        velocity 模版引擎-->
         <velocity.version>2.0</velocity.version>
         <!--        mysql连接-->
-        <mysql-connector.version>8.0.22</mysql-connector.version>
+        <mysql-connector.version>8.0.28</mysql-connector.version>
         <!--        swagger-->
         <swagger.version>2.9.2</swagger.version>
         <!--        swagger-bootstrap.version-->
